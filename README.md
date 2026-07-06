@@ -28,3 +28,15 @@
 - 表・箇条書き・ソースコードが崩れていないか
 - 参考文献が表示されるか
 - 2段組の図が正しく表示されるか
+
+###作ったファイルの名前に関して
+VSCodeの人
+→ LaTeX_practice_VSCode.tex
+
+Overleafの人
+→ LaTeX_practice_Overleaf.tex
+
+CloudLaTeXの人
+→ LaTeX_practice_CloudLaTeX.tex
+にしてください.
+異なる環境で同じ名前のファイルが乱立するのを避けるためです.

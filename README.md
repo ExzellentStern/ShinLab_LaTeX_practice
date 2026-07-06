@@ -29,15 +29,11 @@
 - 参考文献が表示されるか
 - 2段組の図が正しく表示されるか
 
-作ったファイルの名前に関して
+■ VSCode（TeX Live）を使用する人
+LaTeX_practice_VSCode.tex
 
-VSCodeの人
-→ LaTeX_practice_VSCode.tex
+■ Overleafを使用する人
+LaTeX_practice_Overleaf.tex
 
-Overleafの人
-→ LaTeX_practice_Overleaf.tex
-
-CloudLaTeXの人
-→ LaTeX_practice_CloudLaTeX.tex
-にしてください.
-異なる環境で同じ名前のファイルが乱立するのを避けるためです.
+■ CloudLaTeXを使用する人
+LaTeX_practice_CloudLaTeX.tex

@@ -1,6 +1,6 @@
 %こっちに後で模範回答もかく.
 \documentclass[a4paper,twocolumn]{jsarticle}
-%\documentclass[a4j, twocolumn]{jsarticle} 
+%\documentclass[a4j, twocolumn]{jsarticle}
 %a4jだと画像挿入でエラーが出るのでa4paperに変更
 
 
@@ -177,7 +177,7 @@ LaTeXでは，図を挿入することもできます．
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=3cm]{LaTeX_practice_image.jpg}
+    \includegraphics[width=3cm]{figures/LaTeX_practice_figure_1.jpg}
     \caption{LaTeXで挿入した図の例}
     \label{fig:practice}
 \end{figure}
@@ -186,7 +186,7 @@ LaTeXでは，図を挿入することもできます．
 %ここに画像を挿入する.わからない時は,画像の写真と共に,生成AIに「画像を貼るLaTeXのコードを作成」などと聞けばいい.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=3cm]{Tokai_University_Shonan_Building_1.jpg}
+    \includegraphics[width=3cm]{figures/LaTeX_practice_figure_2.jpg}
     \caption{LaTeXで挿入した図の例}
     \label{fig:Tokai}
 \end{figure}
@@ -354,7 +354,7 @@ LaTeXでは，一般的にBibTeXを用いて参考文献を管理します．
 しています．\\
 実際に手順1から手順3をすべて行うと,\\
 「深層学習ではResNetが広く利用されている\cite{he2016resnet}」
-\bibliographystyle{ieeetr} 
+\bibliographystyle{ieeetr}
 \bibliography{references}
 
 のように記載される.演習は省略.
@@ -380,14 +380,14 @@ LaTeXでは，一般的にBibTeXを用いて参考文献を管理します．
 
     \begin{subfigure}{0.47\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{LaTeX_practice_image.jpg}
+        \includegraphics[width=\linewidth]{figures/LaTeX_practice_figure_1.jpg}
         \caption{画像1}
         \label{fig:image1}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.47\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{Tokai_University_Shonan_Building_1.jpg}
+        \includegraphics[width=\linewidth]{figures/LaTeX_practice_figure_2.jpg}
         \caption{画像2}
         \label{fig:image2}
     \end{subfigure}

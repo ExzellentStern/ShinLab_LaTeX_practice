@@ -31,10 +31,18 @@ LaTeXの作成環境によって，利用できるコンパイラ，パッケー
 4. コンパイラを設定する．すべての環境で同じコンパイル方式を使用する．  
    各環境の設定画面やビルド設定から，以下のように選択すること．
 
-   - VS Codeでは，LaTeX Workshopなどのビルド設定で`LuaLaTeX`を選択する．
-   - Overleafでは，`File` → `Settings` → `Compiler`から`LaTeX`を選択する．さらに，`latexmkrc`を`LaTeX_practice.tex`と同じディレクトリーに入っているのか，`latexmkrc`に拡張子が付いてないか，必ず確認する．
-   - CloudLaTeXでは，プロジェクトのコンパイラ設定から`LuaLaTeX`を選択する．
+   - **VS Code（TeX Live）**
+     - LaTeX Workshopなどのビルド設定で`LuaLaTeX`を選択する．
+
+   - **Overleaf**
+     - `File` → `Settings` → `Compiler`から`LaTeX`を選択する．
+     - さらに，`latexmkrc`を`LaTeX_practice.tex`と同じディレクトリーに入っているのか，`latexmkrc`に拡張子が付いてないか，必ず確認する．
+   
+   - **CloudLaTeX**
+     - プロジェクトのコンパイラ設定から`LuaLaTeX`を選択する．
 
 5. `LaTeX_practice.tex`をコンパイルする．
 
 6. 同じ環境で，解答用ファイルである`LaTeX_practice_answer.tex`もコンパイルする．
+
+7. `homework`というところに課題を提出する．この際のファイルの名前は`LaTeX_practice_{自分の名前}.tex`にする．

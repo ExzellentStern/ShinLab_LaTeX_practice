@@ -36,7 +36,7 @@ LaTeXの作成環境によって，利用できるコンパイラ，パッケー
 
    - **Overleaf**
      - `File` → `Settings` → `Compiler`から`LaTeX`を選択する．
-     - さらに，`latexmkrc`を`LaTeX_practice.tex`と同じディレクトリーに入っているのか，`latexmkrc`に拡張子が付いてないか，必ず確認する．
+     - さらに，`latexmkrc`が`LaTeX_practice.tex`と同じディレクトリーに入っているのか，`latexmkrc`に拡張子が付いてないか，必ず確認する．
    
    - **CloudLaTeX**
      - プロジェクトのコンパイラ設定から`LuaLaTeX`を選択する．

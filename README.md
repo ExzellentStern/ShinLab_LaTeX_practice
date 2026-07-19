@@ -45,4 +45,6 @@ LaTeXの作成環境によって，利用できるコンパイラ，パッケー
 
 6. 同じ環境で，解答用ファイルである`LaTeX_practice_answer.tex`もコンパイルする．
 
-7. `homework`というところに課題を提出する．この際のファイルの名前は`LaTeX_practice_{自分の名前}.tex`にする．
+7. コンパイルに問題がないことが確認出来たら，`LaTeX_practice.tex`を修正し，課題に取り込む．
+
+8. `homework`というフォルダーの中に課題を提出する．この際のファイルの名前は`homework/LaTeX_practice_{自分の名前}.tex`にする．

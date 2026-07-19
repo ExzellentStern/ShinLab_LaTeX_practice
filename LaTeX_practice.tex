@@ -1,7 +1,5 @@
 \documentclass[a4paper,twocolumn]{jsarticle}
-%\documentclass[a4j, twocolumn]{jsarticle} 
-%a4jだと画像挿入でエラーが出るのでa4paperに変更
-
+% a4jでは画像挿入時に問題が起こる場合があるため，a4paperを使用する．
 
 % ===== 基本 =====
 \usepackage[
@@ -11,10 +9,11 @@
     top=2.0cm,
     bottom=2.0cm
 ]{geometry}
-\usepackage[dvipdfmx]{hyperref}
 \usepackage{amsmath,amssymb,mathtools,bm}
 \usepackage[dvipdfmx]{graphicx}
 \usepackage[dvipdfmx]{xcolor}
+\usepackage[dvipdfmx,unicode]{hyperref}
+\usepackage{pxjahyper}
 \usepackage{titlesec}
 \usepackage{wrapfig}
 \usepackage{multicol}
@@ -23,12 +22,12 @@
 \usepackage{float}
 \usepackage{caption}
 \usepackage{subcaption}
+
 % ===== TikZ・図 =====
 \usepackage{tikz}
 \usetikzlibrary{positioning}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
-
 
 % ===== 化学 =====
 \usepackage[version=4]{mhchem}
@@ -40,12 +39,13 @@
 % ===== アルゴリズム =====
 \usepackage{algorithm}
 \usepackage{algpseudocode}
-%========ダミーテキストを入れるだけ.実際は不要.
+
+% ===== ダミーテキスト =====
+% 発展例で図の回り込みを確認するために使用する．実際の文書では不要．
 \usepackage{lipsum}
 
-
 % ===== 数学補助 =====
-%\numberwithin{equation}{section}
+% \numberwithin{equation}{section}
 \renewcommand{\theequation}{\arabic{equation}}
 
 \DeclareMathOperator{\sgn}{sgn}
@@ -63,6 +63,21 @@
 \newcommand{\vect}[1]{\bm{#1}}
 \newcommand{\tensor}[1]{\bm{#1}}
 
+% 画像がまだ配置されていない場合も，文書全体はコンパイルできるようにする．
+% 指定した画像が存在すれば，通常どおりその画像を表示する．
+\newcommand{\practiceimage}[2][\linewidth]{%
+  \IfFileExists{#2}{%
+    \includegraphics[width=#1]{#2}%
+  }{%
+    \fbox{%
+      \parbox[c][28mm][c]{\dimexpr#1-2\fboxsep-2\fboxrule\relax}{%
+        \centering\small
+        画像ファイル\\未配置%
+      }%
+    }%
+  }%
+}
+
 % ===== 見出し設定 =====
 \titleformat{\section}[block]
   {\normalfont\Large\bfseries}
@@ -75,6 +90,9 @@
 \titleformat{\subsubsection}[block]
   {\normalfont\normalsize\bfseries}
   {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{2.0ex plus 0.5ex minus 0.2ex}{0.8ex}
+\titlespacing*{\subsection}{0pt}{1.5ex plus 0.4ex minus 0.2ex}{0.5ex}
 
 \lstset{
     language=C,
@@ -92,49 +110,64 @@
     stringstyle=\color{red},
     tabsize=4
 }
-% 箇条書きの詰まりを軽減
-\setlist[itemize]{topsep=4pt, itemsep=2pt, leftmargin=*}
 
-\title{
+\setlist[itemize]{topsep=4pt,itemsep=2pt,leftmargin=*}
+\setlist[enumerate]{topsep=4pt,itemsep=2pt,leftmargin=*}
+\captionsetup{font=small}
+\setlength{\columnsep}{8mm}
+\setlength{\emergencystretch}{1em}
+\raggedbottom
+
+\title{%
 LaTeX文章を作成しよう
-%ここに自分で新しいテーマをつけてみる.(なんでもいい)
+% ここに自分で新しいテーマを付けてみる．テーマは自由である．
 }
-%ここ自分の名前にする
+% ここを自分の名前に変更する．
 \author{慎研究室}
-%ここに日付を入れる. \date{\today}で今日の日付が入る.
+% \date{\today}とすると，コンパイルした日付が入る．
 \date{}
 
 \begin{document}
-\maketitle  % タイトルを表示
-%演習3:Abstractの挿入
-%\lipsum[1] を入れて見ましょう.ダミーテキストです.
 
-\section*{演習1:動作確認}
-GitHubからこの「\texttt{LaTeX\_practice.tex}」をダウンロードし,
-自分のPCでコンパイルしてみましょう.
-正しくコンパイルできれば, PDFが生成されます.
-\section*{演習2:テーマの変更}
-タイトルと著者名を自分のものに変更し,dateには\verb|\today|を入れて,コンパイルしてみましょう.\\
-\section*{演習3:Abstractの挿入}
-Abstractを挿入することで,論文の概要を簡潔にまとめることができます.
+\maketitle
+
+% 演習3：Abstractの挿入
+% \begin{abstract} ... \end{abstract}を\maketitleの後へ追加する．
+
+\section*{演習1：動作確認}
+GitHubからこの「\texttt{LaTeX\_practice.tex}」をダウンロードし，
+自分のPCでコンパイルしてみましょう．
+正しくコンパイルできれば，PDFが生成されます．
+
+\section*{演習2：テーマの変更}
+タイトルと著者名を自分のものに変更し，\texttt{date}には\verb|\today|を入れて，
+コンパイルしてみましょう．
+
+\section*{演習3：Abstractの挿入}
+Abstractを挿入することで，論文の概要を簡潔にまとめることができます．
+
 \begin{verbatim}
-    \begin{abstract}
-    ここにAbstractを記述します。
-    \end{abstract}
+\begin{abstract}
+ここにAbstractを記述します．
+\end{abstract}
 \end{verbatim}
-実際に,このコードをこの文書の一番上に挿入して見ましょう.
-\section*{演習3：数式の挿入}
+
+実際に，このコードを\verb|\maketitle|の後へ挿入してみましょう．
+
+\section*{演習4：数式の挿入}
 LaTeXでは，数式を美しく記述することができます．
-数式の記述にはインライン数式とディスプレイ数式の2種類があります．
+数式の記述には，インライン数式とディスプレイ数式の2種類があります．
+
 \subsection*{インライン数式}
 円の面積は $S=\pi r^2$ で表される．
 
 オイラーの公式は $e^{i\pi}+1=0$ である．
 
 関数 $f(x)=x^2+2x+1$ を考える．
+
 \subsection*{ディスプレイ数式}
 \begin{equation}
-\int_{0}^{1} x^2\,dx=\frac{1}{3}
+\int_{0}^{1} x^2\,\dif x=\frac{1}{3}
 \label{eq:integral}
 \end{equation}
 
@@ -152,25 +185,36 @@ A=
 \left(1+\frac{1}{n}\right)^n=e
 \label{eq:euler}
 \end{equation}
-(ディスプレイ数式は，\verb|\[ ... \]| で囲むことで番号なしの数式として表示できます．
-一方，番号を付けたい場合は \verb|equation| 環境を使用します．)
-実際にインライン数式とディスプレイ数式それぞれを使って,自分で数式を挿入してみましょう.
-%ここに自分で数式を挿入してみる.
-\section*{演習4：図の挿入}
+
+ディスプレイ数式は，\verb|\[ ... \]|で囲むと番号なしで表示できます．
+番号を付けたい場合は，\verb|equation|環境を使用します．
+実際に，インライン数式とディスプレイ数式をそれぞれ使って，
+自分で数式を挿入してみましょう．
+
+% ここに自分で数式を挿入する．
+
+\section*{演習5：図の挿入}
 LaTeXでは，図を挿入することもできます．
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=3cm]{LaTeX_practice_image.jpg}
+    \practiceimage[3cm]{figures/LaTeX_practice_figure_1.jpg}
     \caption{LaTeXで挿入した図の例}
     \label{fig:practice}
 \end{figure}
-画像の挿入は，画像ファイルの場所や拡張子，パッケージ設定などが原因でエラーになることがあります．
+
+画像の挿入は，画像ファイルの場所や拡張子，パッケージ設定などが原因で
+エラーになることがあります．
 エラーが出ても慌てず，エラーメッセージを読みながら一つずつ原因を確認しましょう．
-では,自分で画像を挿入してみましょう.\\
-%ここに画像を挿入する.わからない時は,画像の写真と共に,生成AIに「画像を貼るLaTeXのコードを作成」などと聞けばいい.
-\section*{演習5:表の挿入}
+では，自分で画像を挿入してみましょう．
+
+% ここに画像を挿入する．
+% 分からないときは，画像とともに生成AIへ
+% 「画像を貼るLaTeXのコードを作成」などと質問してもよい．
+
+\section*{演習6：表の挿入}
 LaTeXでは，表を挿入することもできます．
+
 \begin{table}[H]
     \centering
     \begin{tabular}{|c|c|c|}
@@ -184,94 +228,97 @@ LaTeXでは，表を挿入することもできます．
     \caption{LaTeXで挿入した表の例}
     \label{tab:practice}
 \end{table}
-では,自分で5行7列の表を挿入してみましょう.\\
-%ここに表を挿入する.わからない時は,表の写真と共に,生成AIに「表を貼るLaTeXのコードを作成」などと聞けばいい.
-\section*{演習6：箇条書き}
+
+では，自分で5行7列の表を挿入してみましょう．
+
+% ここに表を挿入する．
+% 分からないときは，表の画像とともに生成AIへ
+% 「表を作るLaTeXのコードを作成」などと質問してもよい．
+
+\section*{演習7：箇条書き}
 \begin{itemize}
     \item LaTeX
     \item Python
     \item GitHub
 \end{itemize}
-では,自分で箇条書きを作成してみましょう.\\
-%ここに箇条書きを作成する.わからない時は,箇条書きの写真と共に,生成AIに「箇条書きを貼るLaTeXのコードを作成」などと聞けばいい.
-\section*{演習7：ソースコードの挿入}
 
-LaTeXではソースコードもきれいに掲載できます。
+では，自分で箇条書きを作成してみましょう．
+
+% ここに箇条書きを作成する．
+
+\section*{演習8：ソースコードの挿入}
+LaTeXでは，ソースコードもきれいに掲載できます．
 
 \begin{lstlisting}
 #include <stdio.h>
 
 int main(void)
 {
-    for(int i = 0; i < 10; i++){
+    for (int i = 0; i < 10; i++) {
         printf("%d\n", i);
     }
 
     return 0;
 }
 \end{lstlisting}
-では,自分でソースコードを挿入してみましょう.\\
-%ここにソースコードを挿入する.なんでもいい.
-\section*{演習8：URLの挿入}
-URLを挿入することもできます。
-OpenAIのホームページはこちらです。\\
-\url{https://openai.com}\\
-では,自分で適当にURLを挿入してみましょう.\\
-%ここにURLを挿入する.
-\section*{演習9：参考文献}
 
+では，自分でソースコードを挿入してみましょう．
+
+% ここにソースコードを挿入する．内容は自由である．
+
+\section*{演習9：URLの挿入}
+URLを挿入することもできます．
+OpenAIのホームページはこちらです．
+
+\url{https://openai.com}
+
+では，自分で任意のURLを挿入してみましょう．
+
+% ここにURLを挿入する．
+
+\section*{演習10：参考文献}
 卒業論文や学術論文では，他者の研究や論文を引用した場合，
 必ず参考文献を明記する必要があります．
 
 LaTeXでは，一般的にBibTeXを用いて参考文献を管理します．
 参考文献を追加する手順は，大きく分けて次の3つです．
 
-\subsection*{手順1：.bibファイルを作成する}
-
-まず，\texttt{references.bib} という名前のファイルを作成します．
+\subsection*{手順1：\texttt{.bib}ファイルを作成する}
+まず，\texttt{references.bib}という名前のファイルを作成します．
 このファイルには，引用する論文や書籍の情報を記述します．
-
 例えば，次のように記述します．
 
-\begin{verbatim}
+\begin{lstlisting}[language={}]
 @inproceedings{he2016resnet,
   author    = {Kaiming He and others},
   title     = {Deep Residual Learning for Image Recognition},
   booktitle = {CVPR},
   year      = {2016}
 }
-\end{verbatim}
+\end{lstlisting}
 
-なお，Google ScholarやIEEE Xploreでは，
-「BibTeX」を選択するだけでこの形式を取得できるため，
-自分で入力することはほとんどありません．
+Google ScholarやIEEE Xploreでは，「BibTeX」を選択するだけで
+この形式を取得できるため，自分で一から入力する必要はほとんどありません．
 
 \subsection*{手順2：本文中で引用する}
-
-引用したい箇所に，
+引用したい箇所に，次のように記述します．
 
 \begin{verbatim}
 \cite{he2016resnet}
 \end{verbatim}
 
-と記述します．
-
 例えば，
 
 \begin{verbatim}
 深層学習ではResNetが広く利用されている
-\cite{he2016resnet}.
+\cite{he2016resnet}．
 \end{verbatim}
 
-と書くと，
-
-「深層学習ではResNetが広く利用されている[1].」
-
-のように引用番号が自動で付与されます．
+と書くと，「深層学習ではResNetが広く利用されている[1]．」のように，
+引用番号が自動で付与されます．
 
 \subsection*{手順3：参考文献一覧を表示する}
-
-最後に，文書の末尾へ次の2行を追加します．
+文書の末尾へ，次の2行を追加します．
 
 \begin{verbatim}
 \bibliographystyle{ieeetr}
@@ -282,27 +329,24 @@ LaTeXでは，一般的にBibTeXを用いて参考文献を管理します．
 
 \begin{itemize}
     \item \texttt{ieeetr}：参考文献の表示形式
-    \item \texttt{references}：作成した \texttt{references.bib} を指定
+    \item \texttt{references}：作成した\texttt{references.bib}の指定
 \end{itemize}
 
-しています．\\
-実際に手順1から手順3をすべて行うと,\\
-「深層学習ではResNetが広く利用されている\cite{he2016resnet}」
-\bibliographystyle{ieeetr} 
-\bibliography{references}
+を表しています．
+実際に手順1から手順3までを行うと，本文では次のように表示されます．
 
-のように記載される.
+「深層学習ではResNetが広く利用されている\cite{he2016resnet}．」
+
 卒業論文では，参考文献の管理にBibTeXを用いることが一般的です．
-今回は演習は省略しますが，研究を進める際には必ず利用する機能です．
+今回は演習を省略しますが，研究を進める際には必ず利用する機能です．
 
 \subsection*{発展：2段組で大きな図を挿入する}
+卒業論文では，本文を2段組にし，図やグラフのみページ全体の幅で
+表示することがあります．
 
-卒業論文では，本文を2段組にし，
-図やグラフのみページ全体の幅で表示することがあります．
+その場合は，\verb|figure|の代わりに\verb|figure*|環境を使用します．
+図がページ上部へ自動配置されることを確認するため，後ろにダミーテキストを入れています．
 
-その場合は，\verb|figure| の代わりに
-\verb|figure*| 環境を使用します．
-(図がページの上部に自動的に配置されていることを視覚化するためにダミーテキストを入れています.)
 \begin{lstlisting}[language={[LaTeX]TeX}]
 \begin{figure*}[t]
     \centering
@@ -314,29 +358,28 @@ LaTeXでは，一般的にBibTeXを用いて参考文献を管理します．
 
 \begin{figure*}[t]
     \centering
-
     \begin{subfigure}{0.47\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{LaTeX_practice_image.jpg}
+        \practiceimage[\linewidth]{figures/LaTeX_practice_figure_1.jpg}
         \caption{画像1}
         \label{fig:image1}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.47\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{Tokai_University_Shonan_Building_1.jpg}
+        \practiceimage[\linewidth]{figures/LaTeX_practice_figure_2.jpg}
         \caption{画像2}
         \label{fig:image2}
     \end{subfigure}
-
     \caption{画像を横並びにした例}
     \label{fig:images}
-
 \end{figure*}
-\lipsum[2]
-\lipsum[3]
-\lipsum[4]
-\lipsum[5]
-\lipsum[6]
-\lipsum[7]
+
+\lipsum[2-7]
+
+% 参考文献一覧は，文書の最後に一度だけ出力する．
+\clearpage
+\bibliographystyle{ieeetr}
+\bibliography{references}
+
 \end{document}

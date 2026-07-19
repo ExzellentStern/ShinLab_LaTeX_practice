@@ -1,39 +1,48 @@
-## 動作確認のお願い
+## LaTeXのコンパイルについて
 
-この教材は，OverleafおよびCloudLaTeXで利用できることを目標としています．
-各自で以下のいずれかの環境を担当し，コンパイルできるか確認してください．
+LaTeXの作成環境によって，利用できるコンパイラ，パッケージ，フォント，設定画面などには多少の違いがあります．  
+ただし，使用するコンパイル方式や必要なファイルを揃えれば，基本的にはどの環境でも同等の出力結果を得られます．
 
-### Overleafで確認する人
+本リポジトリでは，VS Code，Overleaf，CloudLaTeXの各環境に対応したファイルを用意しています．
+コンパイル方式や環境ごとの設定について詳しく知りたい場合は，`LaTeX_explanation.pdf`を参照してください．
 
-1. GitHubからこのリポジトリをZIPでダウンロードする
-2. OverleafでNew Project → Upload Projectを選択する
-3. ZIPファイルをアップロードする
-4. Menu → Settings → Compiler を LuaLaTeX に変更する
-5. `LaTeX_practice.tex` をコンパイルする
-6. `LaTeX_practice_answer.tex` もコンパイルできるか確認する
+各自で次のいずれかの環境を確認し，正常にコンパイルできるか確認してください．
 
-### CloudLaTeXで確認する人
+## 手順
 
-1. GitHubからこのリポジトリをZIPでダウンロードする
-2. CloudLaTeXにプロジェクトをアップロードする
-3. コンパイラ設定を確認する
-4. `LaTeX_practice.tex` をコンパイルする
-5. `LaTeX_practice_answer.tex` もコンパイルできるか確認する
+1. GitHubからこのリポジトリをZIP形式でダウンロードする．
 
-### 確認してほしいこと
+2. 使用する環境に応じて，プロジェクトを開く．
 
-- PDFが最後まで生成されるか
-- 日本語が正しく表示されるか
-- 画像が表示されるか
-- 表・箇条書き・ソースコードが崩れていないか
-- 参考文献が表示されるか
-- 2段組の図が正しく表示されるか
+   - **VS Code（TeX Live）**
+     - ZIPファイルを展開する．
+     - 展開したフォルダをVS Codeで開く．
 
-■ VSCode（TeX Live）を使用する人
-LaTeX_practice_VSCode.tex
+   - **Overleaf**
+     - `New Project` → `Upload Project`を選択する．
+     - ダウンロードしたZIPファイルをアップロードする．
 
-■ Overleafを使用する人
-LaTeX_practice_Overleaf.tex
+   - **CloudLaTeX**
+     - 新しいプロジェクトを作成する．
+     - ZIPファイル，または展開したプロジェクト内のファイルをアップロードする．
 
-■ CloudLaTeXを使用する人
-LaTeX_practice_CloudLaTeX.tex
+3. 練習用ファイルである`LaTeX_practice.tex`を開く．
+
+4. コンパイラを設定する．すべての環境で同じコンパイル方式を使用する．  
+   各環境の設定画面やビルド設定から，以下のように選択すること．
+
+   - **VS Code（TeX Live）**
+     - LaTeX Workshopなどのビルド設定で`LuaLaTeX`を選択する．
+
+   - **Overleaf**
+     - `File` → `Settings` → `Compiler`から`LaTeX`を選択する．
+     - さらに，`latexmkrc`を`LaTeX_practice.tex`と同じディレクトリーに入っているのか，`latexmkrc`に拡張子が付いてないか，必ず確認する．
+   
+   - **CloudLaTeX**
+     - プロジェクトのコンパイラ設定から`LuaLaTeX`を選択する．
+
+5. `LaTeX_practice.tex`をコンパイルする．
+
+6. 同じ環境で，解答用ファイルである`LaTeX_practice_answer.tex`もコンパイルする．
+
+7. `homework`というところに課題を提出する．この際のファイルの名前は`LaTeX_practice_{自分の名前}.tex`にする．

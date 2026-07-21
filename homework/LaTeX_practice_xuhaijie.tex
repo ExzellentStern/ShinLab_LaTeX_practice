@@ -1,0 +1,440 @@
+\documentclass[a4paper,twocolumn]{jsarticle}
+% a4jでは画像挿入時に問題が起こる場合があるため，a4paperを使用する．
+
+% ===== 基本 =====
+\usepackage[
+    a4paper,
+    left=2.0cm,
+    right=2.0cm,
+    top=2.0cm,
+    bottom=2.0cm
+]{geometry}
+\usepackage{amsmath,amssymb,mathtools,bm}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{xcolor}
+\usepackage[dvipdfmx,unicode]{hyperref}
+\usepackage{pxjahyper}
+\usepackage{titlesec}
+\usepackage{wrapfig}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% ===== TikZ・図 =====
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% ===== 化学 =====
+\usepackage[version=4]{mhchem}
+\usepackage{chemfig}
+
+% ===== 回路 =====
+\usepackage{circuitikz}
+
+% ===== アルゴリズム =====
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+% ===== ダミーテキスト =====
+% 発展例で図の回り込みを確認するために使用する．実際の文書では不要．
+\usepackage{lipsum}
+
+% ===== 数学補助 =====
+% \numberwithin{equation}{section}
+\renewcommand{\theequation}{\arabic{equation}}
+
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\ii}{\mathrm{i}}
+
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pdd}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+
+\newcommand{\vect}[1]{\bm{#1}}
+\newcommand{\tensor}[1]{\bm{#1}}
+
+% 画像がまだ配置されていない場合も，文書全体はコンパイルできるようにする．
+% 指定した画像が存在すれば，通常どおりその画像を表示する．
+\newcommand{\practiceimage}[2][\linewidth]{%
+  \IfFileExists{#2}{%
+    \includegraphics[width=#1]{#2}%
+  }{%
+    \fbox{%
+      \parbox[c][28mm][c]{\dimexpr#1-2\fboxsep-2\fboxrule\relax}{%
+        \centering\small
+        画像ファイル\\未配置%
+      }%
+    }%
+  }%
+}
+
+% ===== 見出し設定 =====
+\titleformat{\section}[block]
+  {\normalfont\Large\bfseries}
+  {\thesection}{1em}{}
+
+\titleformat{\subsection}[block]
+  {\normalfont\large\bfseries}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}[block]
+  {\normalfont\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{2.0ex plus 0.5ex minus 0.2ex}{0.8ex}
+\titlespacing*{\subsection}{0pt}{1.5ex plus 0.4ex minus 0.2ex}{0.5ex}
+
+\lstset{
+    language=C,
+    basicstyle=\ttfamily\small,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    frame=single,
+    rulecolor=\color{black},
+    backgroundcolor=\color{gray!10},
+    breaklines=true,
+    showstringspaces=false,
+    columns=fullflexible,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!50!black},
+    stringstyle=\color{red},
+    tabsize=4
+}
+
+\setlist[itemize]{topsep=4pt,itemsep=2pt,leftmargin=*}
+\setlist[enumerate]{topsep=4pt,itemsep=2pt,leftmargin=*}
+\captionsetup{font=small}
+\setlength{\columnsep}{8mm}
+\setlength{\emergencystretch}{1em}
+\raggedbottom
+
+\title{人物識別システムの設計と実装}
+\author{東海大学 情報理工学部\\
+コンピュータ応用工学科\\
+学籍番号：XXXXXXXX\\
+徐 海杰}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+本研究では，YOLOv5，DeepSORT，ReIDおよび人物属性認識を用いた人物識別システムを提案する．
+監視カメラ映像から人物を検出・追跡し，同一人物を識別することで入退室管理を実現した．
+実験ではシステムの認識性能およびリアルタイム性能を評価した．
+\end{abstract}
+
+\section{はじめに}
+近年，監視カメラを利用した人物認識技術は，
+防犯や入退室管理など様々な分野で利用されている．
+本研究では，YOLOv5，DeepSORT，ReIDおよび
+人物属性認識を組み合わせた人物識別システムを提案する．
+
+\section{システム構成}
+本システムは人物検出，人物追跡，人物識別，
+データベース管理の4つのモジュールから構成される．
+
+\section{人物検出}
+人物検出にはYOLOv5を用いた．
+YOLOv5はリアルタイム物体検出が可能であり，
+人物クラスのみを検出対象とした．
+
+\begin{verbatim}
+\begin{abstract}
+ここにAbstractを記述します．
+\end{abstract}
+\end{verbatim}
+
+実際に，このコードを\verb|\maketitle|の後へ挿入してみましょう．
+この解答例では，タイトルの直後にダミーテキストのAbstractを挿入しています．
+
+
+\section{人物追跡}
+人物追跡にはDeepSORTを用いた．
+DeepSORTは検出結果と特徴量を利用して，
+各人物にTrack IDを割り当てる．
+
+\subsection*{インライン数式}
+円の面積は $S=\pi r^2$ で表される．
+
+オイラーの公式は $e^{i\pi}+1=0$ である．
+
+関数 $f(x)=x^2+2x+1$ を考える．
+
+\subsection*{IoU（YOLO）}
+\begin{equation}
+IoU=\frac{|A\cap B|}{|A\cup B|}
+\end{equation}
+
+\subsection*{ReID}
+\begin{equation}
+d(\mathbf{x},\mathbf{y})
+=
+\sqrt{\sum_{i=1}^{n}(x_i-y_i)^2}
+\end{equation}
+
+\subsection*{Cosine Similarity}
+\begin{equation}
+\cos\theta=
+\frac{\mathbf{x}\cdot\mathbf{y}}
+{\|\mathbf{x}\|\|\mathbf{y}\|}
+\end{equation}
+
+ディスプレイ数式は，\verb|\[ ... \]|で囲むと番号なしで表示できます．
+番号を付けたい場合は，\verb|equation|環境を使用します．
+実際に，インライン数式とディスプレイ数式をそれぞれ使って，
+自分で数式を挿入してみましょう．
+
+
+\section{人物識別}
+人物識別にはReID特徴量と
+Paddle Attributeによる属性認識を組み合わせた．
+
+
+\begin{figure}[H]
+    \centering
+    \practiceimage[3cm]{figures/LaTeX_practice_figure_1.jpg}
+    \caption{LaTeXで挿入した図の例}
+    \label{fig:practice}
+\end{figure}
+
+画像の挿入は，画像ファイルの場所や拡張子，パッケージ設定などが原因で
+エラーになることがあります．
+エラーが出ても慌てず，エラーメッセージを読みながら一つずつ原因を確認しましょう．
+では，自分で画像を挿入してみましょう．
+
+\subsection*{解答例}
+\begin{figure}[H]
+    \centering
+    \practiceimage[3cm]{figures/LaTeX_practice_figure_2.jpg}
+    \caption{自分で挿入した図の例}
+    \label{fig:tokai}
+\end{figure}
+
+\section{実験}
+実験環境および認識精度について評価した
+
+\begin{table}[H]
+\centering
+\caption{人物識別精度}
+\label{tab:accuracy}
+
+\begin{tabular}{|c|c|}
+\hline
+手法 & Accuracy(\%)\\
+\hline
+YOLOv5 & 96.2\\
+DeepSORT & 94.8\\
+提案手法 & 97.5\\
+\hline
+\end{tabular}
+
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{各手法の認識性能}
+    \label{tab:result}
+
+    \resizebox{\columnwidth}{!}{%
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        手法 & Precision(\%) & Recall(\%) & Accuracy(\%) & FPS \\
+        \hline
+        YOLOv5 & 95.6 & 94.8 & 95.2 & 32 \\
+        \hline
+        YOLOv5+DeepSORT & 96.4 & 95.9 & 96.1 & 28 \\
+        \hline
+        提案手法 & 97.5 & 97.0 & 97.2 & 24 \\
+        \hline
+    \end{tabular}%
+    }
+\end{table}
+
+\section{まとめ}
+本研究ではYOLOv5，DeepSORT，
+ReIDおよび属性認識を組み合わせた人物識別システムを構築した．
+
+\begin{itemize}
+    \item LaTeX
+    \item Python
+    \item GitHub
+\end{itemize}
+
+では，自分で箇条書きを作成してみましょう．
+
+\subsection*{解答例}
+\begin{itemize}
+    \item 数学
+    \item 物理
+    \item 化学
+    \item 生物
+    \item コンピュータサイエンス
+\end{itemize}
+
+\begin{lstlisting}
+#include <stdio.h>
+
+int main(void)
+{
+    for (int i = 0; i < 10; i++) {
+        printf("%d\n", i);
+    }
+
+    return 0;
+}
+\end{lstlisting}
+
+では，自分でソースコードを挿入してみましょう．
+
+\subsection*{解答例}
+\begin{lstlisting}
+#include <stdio.h>
+
+typedef struct {
+    char name[20];
+    int age;
+} Student;
+
+int main(void)
+{
+    Student s = {"Alice", 20};
+
+    printf("Name : %s\n", s.name);
+    printf("Age  : %d\n", s.age);
+
+    return 0;
+}
+\end{lstlisting}
+
+\section*{演習9：URLの挿入}
+URLを挿入することもできます．
+OpenAIのホームページはこちらです．
+
+\url{https://openai.com}
+
+では，自分で任意のURLを挿入してみましょう．
+
+\subsection*{解答例}
+慎先生のresearchmapはこちらです．
+
+\url{https://researchmap.jp/sgshin}
+
+\section*{演習10：参考文献}
+卒業論文や学術論文では，他者の研究や論文を引用した場合，
+必ず参考文献を明記する必要があります．
+
+LaTeXでは，一般的にBibTeXを用いて参考文献を管理します．
+参考文献を追加する手順は，大きく分けて次の3つです．
+
+\subsection*{手順1：\texttt{.bib}ファイルを作成する}
+まず，\texttt{references.bib}という名前のファイルを作成します．
+このファイルには，引用する論文や書籍の情報を記述します．
+例えば，次のように記述します．
+
+\begin{lstlisting}[language={}]
+@inproceedings{he2016resnet,
+  author    = {Kaiming He and others},
+  title     = {Deep Residual Learning for Image Recognition},
+  booktitle = {CVPR},
+  year      = {2016}
+}
+\end{lstlisting}
+
+Google ScholarやIEEE Xploreでは，「BibTeX」を選択するだけで
+この形式を取得できるため，自分で一から入力する必要はほとんどありません．
+
+\subsection*{手順2：本文中で引用する}
+引用したい箇所に，次のように記述します．
+
+\begin{verbatim}
+\cite{he2016resnet}
+\end{verbatim}
+
+例えば，
+
+\begin{verbatim}
+深層学習ではResNetが広く利用されている
+\cite{he2016resnet}．
+\end{verbatim}
+
+と書くと，「深層学習ではResNetが広く利用されている[1]．」のように，
+引用番号が自動で付与されます．
+
+\subsection*{手順3：参考文献一覧を表示する}
+文書の末尾へ，次の2行を追加します．
+
+\begin{verbatim}
+\bibliographystyle{ieeetr}
+\bibliography{references}
+\end{verbatim}
+
+ここで，
+
+\begin{itemize}
+    \item \texttt{ieeetr}：参考文献の表示形式
+    \item \texttt{references}：作成した\texttt{references.bib}の指定
+\end{itemize}
+
+を表しています．
+実際に手順1から手順3までを行うと，本文では次のように表示されます．
+
+「深層学習ではResNetが広く利用されている\cite{he2016resnet}．」
+
+卒業論文では，参考文献の管理にBibTeXを用いることが一般的です．
+今回は演習を省略しますが，研究を進める際には必ず利用する機能です．
+
+\subsection*{発展：2段組で大きな図を挿入する}
+卒業論文では，本文を2段組にし，図やグラフのみページ全体の幅で
+表示することがあります．
+
+その場合は，\verb|figure|の代わりに\verb|figure*|環境を使用します．
+図がページ上部へ自動配置されることを確認するため，後ろにダミーテキストを入れています．
+
+\begin{lstlisting}[language={[LaTeX]TeX}]
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.8\textwidth]{graph.pdf}
+    \caption{実験結果}
+    \label{fig:result}
+\end{figure*}
+\end{lstlisting}
+
+\begin{figure*}[t]
+    \centering
+    \begin{subfigure}{0.47\textwidth}
+        \centering
+        \practiceimage[\linewidth]{figures/LaTeX_practice_figure_1.jpg}
+        \caption{画像1}
+        \label{fig:image1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.47\textwidth}
+        \centering
+        \practiceimage[\linewidth]{figures/LaTeX_practice_figure_2.jpg}
+        \caption{画像2}
+        \label{fig:image2}
+    \end{subfigure}
+    \caption{画像を横並びにした例}
+    \label{fig:images}
+\end{figure*}
+
+\lipsum[2-7]
+
+% 参考文献一覧は，文書の最後に一度だけ出力する．
+\clearpage
+\bibliographystyle{ieeetr}
+\bibliography{references}
+
+\end{document}

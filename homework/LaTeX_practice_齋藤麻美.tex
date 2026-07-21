@@ -118,21 +118,19 @@
 \setlength{\emergencystretch}{1em}
 \raggedbottom
 
-\title{%
-LaTeX文章を作成しよう
-% ここに自分で新しいテーマを付けてみる．テーマは自由である．
-}
-% ここを自分の名前に変更する．
-\author{慎研究室}
-% \date{\today}とすると，コンパイルした日付が入る．
-\date{}
+\title{LaTeX文章を作成しよう：課題提出}
+\author{慎研究室　齋藤麻美}
+\date{\today}
 
 \begin{document}
 
 \maketitle
 
-% 演習3：Abstractの挿入
-% \begin{abstract} ... \end{abstract}を\maketitleの後へ追加する．
+\begin{abstract}
+本稿では、LaTeXを用いた基本的な文書作成の演習結果について報告する。
+具体的には、数式、図表、箇条書き、ソースコードなどの挿入方法を実践し、
+実際の論文作成に必要な基礎技術の習得を目指す。
+\end{abstract}
 
 \section*{演習1：動作確認}
 GitHubからこの「\texttt{LaTeX\_practice.tex}」をダウンロードし，
@@ -191,7 +189,18 @@ A=
 実際に，インライン数式とディスプレイ数式をそれぞれ使って，
 自分で数式を挿入してみましょう．
 
-% ここに自分で数式を挿入する．
+\begin{equation}
+\oint_{C} \vect{F} \cdot \dif\vect{r}
+\end{equation}
+
+\begin{equation}
+\oint_{C} \frac{1}{z - a} \, \dif z = 2\pi \ii
+\end{equation}
+
+$\oint_C \bm{F} \cdot \mathrm{d}\bm{r}$
+
+$\oint_C \frac{1}{z-a} \, \mathrm{d}z = 2\pi\mathrm{i}$
+
 
 \section*{演習5：図の挿入}
 LaTeXでは，図を挿入することもできます．
@@ -208,9 +217,12 @@ LaTeXでは，図を挿入することもできます．
 エラーが出ても慌てず，エラーメッセージを読みながら一つずつ原因を確認しましょう．
 では，自分で画像を挿入してみましょう．
 
-% ここに画像を挿入する．
-% 分からないときは，画像とともに生成AIへ
-% 「画像を貼るLaTeXのコードを作成」などと質問してもよい．
+\begin{figure}[H]
+    \centering
+    \practiceimage[3cm]{figures/LaTeX_practice_figure_2.jpg}
+    \caption{自分で挿入した図の例}
+    \label{fig:my_practice_image}
+\end{figure}
 
 \section*{演習6：表の挿入}
 LaTeXでは，表を挿入することもできます．
@@ -231,9 +243,21 @@ LaTeXでは，表を挿入することもできます．
 
 では，自分で5行7列の表を挿入してみましょう．
 
-% ここに表を挿入する．
-% 分からないときは，表の画像とともに生成AIへ
-% 「表を作るLaTeXのコードを作成」などと質問してもよい．
+\begin{table}[H]
+    \centering
+    \caption{演習で作成した5行7列の表}
+    \label{tab:my_table_5x7}
+    \resizebox{\linewidth}{!}{% 表を1段の幅に収める設定
+        \begin{tabular}{|c|c|c|c|c|c|c|}
+            \hline
+            回数 & データA & データB & データC & データD & データE & 判定 \\ \hline
+            1    & 10.5    & 20.3    & 30.1    & 40.8    & 50.2    & OK   \\ \hline
+            2    & 11.2    & 19.8    & 29.5    & 41.2    & 49.7    & OK   \\ \hline
+            3    & 9.8     & 21.5    & 31.0    & 39.5    & 51.3    & NG   \\ \hline
+            4    & 10.1    & 20.0    & 30.2    & 40.1    & 50.0    & OK   \\ \hline
+        \end{tabular}%
+    }
+\end{table}
 
 \section*{演習7：箇条書き}
 \begin{itemize}
@@ -245,6 +269,11 @@ LaTeXでは，表を挿入することもできます．
 では，自分で箇条書きを作成してみましょう．
 
 % ここに箇条書きを作成する．
+\begin{itemize}
+    \item 数学
+    \item 理科
+    \item 国語
+\end{itemize}
 
 \section*{演習8：ソースコードの挿入}
 LaTeXでは，ソースコードもきれいに掲載できます．
@@ -265,6 +294,17 @@ int main(void)
 では，自分でソースコードを挿入してみましょう．
 
 % ここにソースコードを挿入する．内容は自由である．
+\begin{lstlisting}[language=Python]
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(0, 10, 100)
+y = np.sin(x)
+
+plt.plot(x, y)
+plt.title("Sine Wave")
+plt.show()
+\end{lstlisting}
 
 \section*{演習9：URLの挿入}
 URLを挿入することもできます．
@@ -275,6 +315,9 @@ OpenAIのホームページはこちらです．
 では，自分で任意のURLを挿入してみましょう．
 
 % ここにURLを挿入する．
+GitHubの公式リポジトリは以下の通りである。
+
+\url{https://github.com}
 
 \section*{演習10：参考文献}
 卒業論文や学術論文では，他者の研究や論文を引用した場合，
